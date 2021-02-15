@@ -19,11 +19,10 @@
             var jsonObj;
             req.addEventListener("load", getJsonEvent, false);
             function getJsonEvent() {
-                //responseText로 데이터를 가져오기 때문에 responseType 변경 필요 X
-                var jsonText = req.responseText;
-                jsonObj = JSON.parse(jsonText);
+                jsonObj = req.response;
                 console.log(jsonObj);
             }
+            req.responseType = "json";
 
             //3. 요청을 전송하고 통신을 시작한다.
             req.open("GET", "Data.json");
