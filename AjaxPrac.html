@@ -13,14 +13,20 @@
             req.onreadystatechange = function() {
                 console.log("B: readyState = " + req.readyState);
             };
-
-            req.addEventListener("progress", progressEvent, false);
-            function progressEvent() {
-                console.log("로딩중...");
+            
+            //JSON 파일 (Data.json) 수신 후 responseText를 이용해 문자열로 받은 후,
+            // 다시 json객체로 생성하기
+            var jsonObj;
+            req.addEventListener("load", getJsonEvent, false);
+            function getJsonEvent() {
+                //responseText로 데이터를 가져오기 때문에 responseType 변경 필요 X
+                var jsonText = req.responseText;
+                jsonObj = JSON.parse(jsonText);
+                console.log(jsonObj);
             }
 
             //3. 요청을 전송하고 통신을 시작한다.
-            req.open("GET", "data.txt");
+            req.open("GET", "Data.json");
             req.send(null);
         };
     </script>
